@@ -1,0 +1,6 @@
+pokemon:
+  init:
+    piotr: charmander
+    lucy: pikachu
+    albert: ditto
+  defaultPokemon: psyduck

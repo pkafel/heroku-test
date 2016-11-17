@@ -1,23 +1,36 @@
 package com.example.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Configuration
+@EnableConfigurationProperties(BaseConfig.PokemonProperties.class)
 public class BaseConfig {
 
-    @Value("${pokemon.init_data}")
-    private String initData;
+    @ConfigurationProperties("pokemon")
+    public static class PokemonProperties {
 
-    @Bean
-    public Map<String, String> getInitData() {
-        return Arrays.stream(initData.split(";"))
-                .collect(Collectors.toMap(
-                        singleEntry -> singleEntry.split("-")[0], singleEntry -> singleEntry.split("-")[1]));
+        private Map<String, String> init;
+
+        private String defaultPokemon;
+
+        public Map<String, String> getInit() {
+            return init;
+        }
+
+        public void setInit(Map<String, String> init) {
+            this.init = init;
+        }
+
+        public String getDefaultPokemon() {
+            return defaultPokemon;
+        }
+
+        public void setDefaultPokemon(String defaultPokemon) {
+            this.defaultPokemon = defaultPokemon;
+        }
     }
 }
