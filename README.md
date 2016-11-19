@@ -18,3 +18,34 @@ public String getPokemon(String userName);
 
 ## Advanced exercise
 * Implement the exercise in both ways (with `.properties` and with `.yml` files) on two separate branches
+
+# Exercise 2
+
+* Create new package - `controller`
+* Inside the package create new Spring's controller class. Your controller should expose the following HTTP API:
+  * Resource for asking for users pokemon:
+    * HTTP method: GET 
+    * url: `/user/{userName}`
+    * response HTTP code: 200
+    * example response format: `{"user":"albert","pokemon":"psyduck"}`
+  * Resource for creation\update of user's pokemon:
+    * HTTP method: PUT 
+    * url: `/user/{userName}`
+    * response HTTP code: 202
+    * empty body in response
+    * request body: `{"pokemon":"psyduck"}`
+    * additional requirement: in case `user` or `pokemon` field is empty service should return 404 with information about missing value
+
+## Advanced exercise
+* Add to your project the following dependency:
+```xml
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-validator</artifactId>
+</dependency>
+```
+* Remove your manual check for `user` or `pokemon` fields in `PUT` resource
+* Put `NotBlank` annotation on top of your fields in request's body class
+* Handle Spring's `MethodArgumentNotValidException` and transform it to server response with:
+  * HTTP status 400
+  * reasonable message

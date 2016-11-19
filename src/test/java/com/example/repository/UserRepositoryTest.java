@@ -9,19 +9,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PokemonRepositoryTest {
+public class UserRepositoryTest {
 
     @Autowired
-    private PokemonRepository pokemonRepository;
+    private UserRepository userRepository;
 
     @Test
     public void shouldReturnCorrectPokemon() {
-        Assert.assertEquals("charmander", pokemonRepository.getPokemon("chris"));
-        Assert.assertEquals("abra", pokemonRepository.getPokemon("lucy"));
+        Assert.assertEquals("charmander", userRepository.getPokemon("chris"));
+        Assert.assertEquals("abra", userRepository.getPokemon("lucy"));
     }
 
     @Test
     public void shouldReturnDefaultPokemon() {
-        Assert.assertEquals("dragonite", pokemonRepository.getPokemon("non-existing-user"));
+        Assert.assertEquals("dragonite", userRepository.getPokemon("non-existing-user"));
     }
 }
